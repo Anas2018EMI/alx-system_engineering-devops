@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Displays "Best School" 10 times using a while loop.
+
+# Process Apache log file using awk
+# 1. Count occurrences of IP + HTTP status code combinations
+# 2. Sort in descending order
+# 3. Format output as required
+awk '{ 
+    # Create key from IP and HTTP status code
+    key = $1 " " $9
+    
+    # Count occurrences in an array
+    count[key]++
+}
+
+END {
+    # Process all entries
+    for (combined in count) {
+        # Print count, IP, and status code
+        printf "%d %s\n", count[combined], combined
+    }
+}' apache-access.log | sort -rn
