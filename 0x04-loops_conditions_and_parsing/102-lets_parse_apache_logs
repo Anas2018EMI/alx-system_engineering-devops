@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Displays "Best School" 10 times using a while loop.
+
+# Use awk to print IP address (1st field) and HTTP status code (9th field)
+awk '{print $1 " " $9}' apache-access.log
