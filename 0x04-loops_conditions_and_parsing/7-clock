@@ -1,10 +1,25 @@
 #!/usr/bin/env bash
 # Displays "Best School" 10 times using a while loop.
-#!/bin/bash
 
-for hour in {0..12}; do
-  echo "Hour: $hour"
-  for minute in {1..59}; do
-    echo "$minute"
-  done
+# Initialize hour counter
+hour=0
+
+# While loop for hours (0-12)
+while [ $hour -le 12 ]
+do
+    echo "Hour: $hour"
+
+    # Initialize minute counter
+    minute=1
+
+    # While loop for minutes (1-59)
+    while [ $minute -le 59 ]
+    do
+        echo "$minute"
+        # Increment minute
+        minute=$((minute + 1))
+    done
+
+    # Increment hour
+    hour=$((hour + 1))
 done
