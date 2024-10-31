@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Displays "Best School" 10 times using a while loop.
+
+# Using while loop to read the file line by line
+while IFS=':' read -r username _ userid _ _ homedir _
+do
+    # Print required fields separated by colons
+    echo "$username:$userid:$homedir"
+done < "/etc/passwd"
