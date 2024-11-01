@@ -1,3 +1,26 @@
 #!/usr/bin/env bash
 # Bash script that displays its own PID.
-ps -a uf
+#!/bin/bash
+
+# Get all processes and store in temporary file to avoid multiple ps calls
+ps axo user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,cmd --forest > /tmp/processes.tmp
+
+# Process the temporary file to adjust the format
+while IFS= read -r line; do
+    # Keep the header line unchanged
+    if [[ $line == USER* ]]; then
+        echo "$line"
+        continue
+    fi
+
+    # Replace the process tree characters with the required format
+    formatted_line=$(echo "$line" | sed '
+        s/│/ /g;
+        s/└─\|├─/\\_ /g;
+        s/   / /g;
+    ')
+    echo "$formatted_line"
+done < /tmp/processes.tmp
+
+# Clean up
+rm -f /tmp/processes.tmp
