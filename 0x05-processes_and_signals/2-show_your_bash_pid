@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Bash script that displays its own PID.
+# shellcheck disable=SC2009
+
+ps axo user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,cmd --forest | grep bash
