@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 # Bash script that displays its own PID.
-
-ps -axu
+ps axo user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,cmd --forest
