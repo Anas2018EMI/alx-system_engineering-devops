@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Backup the current hosts file
+cp /etc/hosts /etc/hosts.backup
+
+# Create a new hosts file with the required changes
+cat <<EOF > /etc/hosts.new
+127.0.0.2 localhost
+8.8.8.8 facebook.com
+EOF
+
+# Append the rest of the original hosts file to the new hosts file
+grep -v -e "localhost" -e "facebook.com" < /etc/hosts.backup >> /etc/hosts.new
+
+# Replace the original hosts file with the new hosts file
+cp -f /etc/hosts.new /etc/hosts
