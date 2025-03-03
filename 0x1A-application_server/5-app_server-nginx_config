@@ -1,0 +1,28 @@
+server {
+    listen 80 default_server;
+
+    listen [::]:80 default_server;
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+    server_name _;
+    add_header X-Served-By $hostname;
+
+
+    location /static/ {
+        alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+    }
+    location / {
+        proxy_pass http://0.0.0.0:5003/2-hbnb;
+    }
+    location /airbnb-onepage {
+        proxy_pass http://0.0.0.0:5000/airbnb-onepage;
+    }
+    location ~ ^/airbnb-dynamic/number_odd_or_even/([0-9]+)$ {
+        proxy_pass http://0.0.0.0:5001/number_odd_or_even/$1;                                       }
+    location /api/ {
+        proxy_pass http://127.0.0.1:5002/api/;
+    }
+
+
+}
+
