@@ -1,0 +1,25 @@
+[Unit]
+Description=Gunicorn instance to serve Flask API
+After=network.target
+
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/AirBnB_clone_v4
+
+EnvironmentFile=/home/ubuntu/AirBnB_clone_v4/.env
+
+
+ExecStart=gunicorn --workers 3  --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app
+
+Restart=always
+# The process should log errors in /tmp/airbnb-error.log
+StandardError=append:/tmp/airbnb-error.log
+# The process should log access in /tmp/airbnb-access.log
+StandardOutput=append:/tmp/airbnb-access.log
+#Identify for syslog messages
+SyslogIdentifier=gunicorn
+
+
+[Install]
+WantedBy=multi-user.target
